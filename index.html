@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Password Generator</title>
+    <!-- Require Meta Tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: rgb(46, 42, 42);
+        }
+        .containerMain {
+            background: rgb(62, 59, 59);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 12px 12px 20px rgba(0, 0, 0, 0.494);
+
+            display: grid;
+            row-gap: 2rem;
+        }
+        .titleContainer {
+            color: #fefefe;
+            font-size: 2.3rem;
+            font-family: monospace;
+            letter-spacing: .1rem;
+        }
+        .container__function,
+        .btnGenerate,
+        .resContainer,
+        .containerRadius {
+            background: rgb(49, 47, 47);
+            padding: .5rem 2rem .5rem 2rem;
+            display: flex;
+            justify-content: center;
+            border-radius: 5px;
+            box-shadow: 12px 12px 20px rgba(25, 24, 24, 0.526);
+            text-align: center;
+            column-gap: 2rem;
+            align-items: center;
+        }
+        .numberQtd {
+            color: #fefefe;
+            font-family: monospace;
+            font-size: 2rem;
+        }
+        .numberCharacters {
+            -webkit-appearance: none;
+            background: #212020;
+            outline: none;
+            width: 100%;
+            height: 20px;
+            border-radius: 9px;  
+            cursor: pointer; 
+        }
+        .numberCharacters::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: rgb(209, 207, 207);
+            cursor: pointer;
+        }
+        .btnGenerate {
+            padding: .5rem;
+        }
+        .generate {
+            background: transparent;
+            padding: .5rem 1.5rem .5rem 1.5rem;
+            color: #fefefe;
+            font-size: 2rem;
+            border-radius: 12px;
+            border: 2px solid #fefefe;
+            transition: .3s;
+            cursor: pointer;
+        }
+        .generate:hover {
+            background: #fefefe;
+            color: rgb(44, 42, 42);
+        }
+        .titleRes {
+            color: #fefefe;
+            font-family: monospace;
+            letter-spacing: .1rem;
+            font-size: 1.6rem;
+            transition: .3s;
+            cursor: pointer;
+        }
+        .titleRes:hover {
+            text-decoration: underline;
+        }
+        .inputRadio {
+            accent-color: #353834;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            border: 1px solid #fefefe;
+        }
+        .inputRadio:hover {
+            transition: .3s;
+            transform: scale(1.3);
+        }
+        .labelRadio {
+            color: #fefefe;
+            font-family: monospace;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- --- * --- Components --- *--- -->
+    <section class="containerMain">
+        <header>
+            <h1 class="titleContainer">Password Generator</h1>
+        </header>
+        <div class="container__function">
+            <h1 class="numberQtd">0</h1>
+            <input onchange="ValuesChange()" type="range" value="0" max="24" class="numberCharacters">
+        </div>
+        <div class="containerRadius">
+            <label class="labelRadio" for="numberInput">Number</label>
+            <input type="checkbox" id="numberInput" class="inputRadio">
+            <label class="labelRadio" for="numberInput">Letters</label>
+            <input type="checkbox" id="numberInput" class="inputRadio">
+        </div>
+        <div class="btnGenerate">
+            <button type="button" onclick="generatePassword()" class="generate">Generate</button>
+        </div>
+        <div class="resContainer">
+            <h1 class="titleRes"></h1>
+        </div>
+    </section>
+    <script>
+        function ValuesChange() {
+            document.querySelector('.numberQtd').innerHTML = document.querySelector('.numberCharacters').value;
+        };
+        function generatePassword() {
+            let qtdPass = document.querySelector('.numberCharacters').value;
+            if(qtdPass != 0) {
+                let pass = functionGenerate(qtdPass);
+                document.querySelector('.titleRes').innerHTML = pass;
+            } else {
+                alert('The value must be greater than zero!');
+            };
+        };
+        const arrayLetters = [
+            'a','b','c','d','e','f',
+            'g','h','i','j','k','l',
+            'm','n','o','p','q','r',
+            's','t','u','v','w','x',
+            'y','z','A','B','C','D',
+            'E','F','G','H','I','J',
+            'K','L','M','N','O','P',
+            'Q','R','S','T','U','V',
+            'W','X','Y','Z'
+        ];
+        function functionGenerate(token) {
+            let password = '';
+            for(i = 0; i < token / 2; i ++) {
+                let pass = Math.floor(Math.random() * 10);
+                // let passLetter = arrayLetters[Math.floor(Math.random() * 52)];
+
+                password = `${password}${pass.toString()}`;
+            };
+            return password;
+        };
+    </script>
+</body>
+</html>
