@@ -64,19 +64,9 @@ function generate(token2,sequence) {
             };
             break;
         case 3:
-            let res = token % 2 == 0 ? 0 : 1;
-            if(res == 0) {
-                for(i = 0; i < token / 2; i ++) {
-                    let passNumbers = Math.floor(Math.random() * 10);
-                    let passLetters = arrayLetters[Math.floor(Math.random() * 52)];    
-                    password = `${password}${passNumbers.toString()}${passLetters}`;
-                };
-            } else {
-                for(i = 0; i < token; i ++) {
-                    let passNumbers = Math.floor(Math.random() * 10);
-                    let passLetters = arrayLettersAndNumbers[Math.floor(Math.random() * 62)];
-                    password = `${password}${passNumbers.toString()}${passLetters}`;
-                };
+            for(i = 0; i < token; i ++) {
+                let passLetters = arrayLettersAndNumbers[Math.floor(Math.random() * 62)];
+                password = `${password}${passLetters}`;
             };
             break;
     };
